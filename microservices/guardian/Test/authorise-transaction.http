@@ -1,0 +1,3 @@
+POST http://localhost:8080/transaction/authorise
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNwbGF5TmFtZSI6IiIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImV4cCI6MTc0MTUzMDQzMiwicm9sZXMiOiJbXCJ1c2VyXCJdIiwidXNlcklkIjoxfQ.MZV-YspEj5sHJw51OjoZLQ8GABiN9dW5BO5Y_5XVX7M
+role: admin

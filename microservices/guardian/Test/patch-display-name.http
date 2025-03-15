@@ -1,0 +1,6 @@
+PATCH http://localhost:8080/user/displayname
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNwbGF5TmFtZSI6IiIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImV4cCI6MTc0MTUyMzYwMywicm9sZXMiOiJbJ3VzZXInXSIsInVzZXJJZCI6MX0.xFNuvSCU7TTalM2RF8sU15AWCZlQFc9ND4Rvnh6g78g
+
+{
+    "displayName": "Test User A"
+}

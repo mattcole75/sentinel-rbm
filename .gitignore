@@ -1,0 +1,5 @@
+# utility files
+*.log
+
+# production
+config.go
