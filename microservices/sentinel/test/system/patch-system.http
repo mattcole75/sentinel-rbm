@@ -1,0 +1,7 @@
+PATCH http://localhost:6791/system/1
+Content-Type: application/json
+
+{
+    "name": "Railway Signals",
+    "description": "Provides the track-side, control equipment, and interlocking requires to safely travers trains across a railway network"
+}

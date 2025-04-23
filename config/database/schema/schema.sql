@@ -29,12 +29,52 @@ create table user (
 );
 
 /*
+ - table engineering discipline
+ - what engineering disciplines will this system be supporting
+*/
+
+create table engineering_discipline (
+    id int not null auto_increment, -- primary key
+
+    discipline varchar(64) not null, -- the engineering discipline
+    description varchar(256) not null,
+
+    in_use boolean not null default true,
+    updated timestamp not null default now() on update now(),
+    created timestamp not null default now(),
+
+    primary key (id)
+);
+
+-- create table configured_meta_list (
+--     id int not null auto_increment, -- primary key
+
+--     domain_ref int not null, -- what domain does this value belong to
+    
+-- );
+
+
+
+/*
  - table functional requirement
  - what high level function must the asset perform, why does the asset exist
 */
 
+create table functional_system (
+    id int not null auto_increment, -- primary key
+
+    name varchar(64) not null, -- the name of the functional system
+    description varchar(512) not null, -- more detail about the functional system
+
+    updated timestamp not null default now() on update now(),
+    created timestamp not null default now(),
+
+    primary key (id)
+);
+
 create table functional_requirement (
     id int not null auto_increment, -- primary key
+    functional_system_ref int not null, -- fk reference to functional system
 
     title varchar(64) not null, -- the formal title of the functional requirement
     statement varchar(512) not null, -- holds the functional requirement statement
@@ -46,25 +86,15 @@ create table functional_requirement (
 
     primary key (id),
     constraint ck_functional_requirement__reference_source
-        check (reference_source in ('Legislation', 'Standard', 'Contract', 'Best Practice'))
-);
-
-create table functional_system (
-    id int not null auto_increment, -- primary key
-    functional_requirement_ref int not null, -- fk reference to the functional requirements table
-
-    name varchar(64) not null, -- the name of the functional system
-    description varchar(512) not null, -- more detail about the functional system
-
-    updated timestamp not null default now() on update now(),
-    created timestamp not null default now(),
-
-    primary key (id),
-    constraint fk_functional_system__functional_requirement
-        foreign key (functional_requirement_ref) references functional_requirement (id) 
-        on update cascade 
+        check (reference_source in ('Legislation', 'Standard', 'Contract', 'Best Practice')),
+    constraint fk_functional_requirement__functional_system
+        Foreign Key (functional_system_ref) references functional_system (id)
+        on update cascade
         on delete cascade
 );
+
+
+
 
 create table asset (
     id int not null auto_increment, -- primary key

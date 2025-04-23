@@ -1,0 +1,7 @@
+POST http://localhost:6791/system
+Content-Type: application/json
+
+{
+    "name": "Signals",
+    "description": "Provides the track-side, control equipment, and interlocking requires to safely travers trains across a railway network."
+}

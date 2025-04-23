@@ -1,0 +1,19 @@
+import { Outlet } from "@remix-run/react";
+
+import MainHeader from "../components/navigation/MainHeader";
+import marketingStyles from "../styles/marketing.css?url";
+
+export default function UnAuthLayout() {
+    return (
+        <>
+            <MainHeader />
+            <Outlet />
+        </>
+    )
+}
+
+export function links() {
+    return [
+        { rel: "stylesheet", href: marketingStyles }
+    ]
+}

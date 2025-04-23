@@ -1,5 +1,13 @@
 # utility files
 *.log
+.DS_Store
+/build/
+node_modules/
+.vs/
+/.cache
+/build
+.env
 
 # production
 config.go
+config.js

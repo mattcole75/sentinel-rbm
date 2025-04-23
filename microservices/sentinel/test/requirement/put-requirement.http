@@ -1,0 +1,9 @@
+PUT http://localhost:6791/requirement/1
+Content-Type: application/json
+
+{
+    "title": "Test Requirement update",
+    "statement": "Test Requirement Statement update",
+    "reference": "reference",
+    "referenceSource": "Contract"
+}

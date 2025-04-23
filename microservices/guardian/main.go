@@ -18,5 +18,5 @@ func main() {
 	// register available route
 	routes.RegisterRoutes(server)
 	//start server
-	server.Run(":8080") // localhost:8080
+	server.Run(":5791") // localhost:5791
 }

@@ -39,11 +39,8 @@ func (u *User) Create() error {
 	stmt, err := db.DB.Prepare(query)
 
 	if err != nil {
-		fmt.Println("MC1", err)
 		return err
 	}
-
-	fmt.Println("db prep")
 
 	// set up the database close defer
 	defer stmt.Close()
@@ -59,11 +56,8 @@ func (u *User) Create() error {
 	res, err := stmt.Exec(u.DisplayName, u.Email, u.Password)
 
 	if err != nil {
-		fmt.Println("MC2", err)
 		return err
 	}
-
-	fmt.Println("db exec")
 
 	// update model with last inserted id
 	userId, err := res.LastInsertId()

@@ -1,0 +1,9 @@
+POST http://localhost:6791/requirement
+Content-Type: application/json
+
+{
+    "title": "Test Requirement",
+    "statement": "Test Requirement Statement",
+    "reference": "reference",
+    "referenceSource": "Contract"
+}
