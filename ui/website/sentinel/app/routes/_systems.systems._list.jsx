@@ -3,6 +3,7 @@ import SystemList from "../components/system/SystemList";
 
 import { FaPlus, FaDownload } from "react-icons/fa";
 import { getSystems } from "../data/systems.server";
+import { requireUserSession } from "../data/auth.server";
 
 export default function SystemListLayout() {
     const systems = useLoaderData();
@@ -27,6 +28,7 @@ export default function SystemListLayout() {
     );
 }
 
-export  function loader() {
-    return getSystems();
+export async function loader({request}) {
+    const userId = await requireUserSession(request);
+    return getSystems(userId);
 }

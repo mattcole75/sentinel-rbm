@@ -1,38 +1,41 @@
 import AuthForm from "../components/auth/AuthForm";
+import { login, signup } from "../data/auth.server";
 import { validateCredentials } from "../data/validation.server";
 
 import styles from "../styles/auth.css?url";
 
 export default function AuthPage() {
-    return (
-        <AuthForm />
-    );
+    return <AuthForm />;
 }
 
-export async function action({request}) {
+export async function action({ request }) {
     const searchParams = new URL(request.url).searchParams;
     const authMode = searchParams.get("mode") || "login";
 
-    const formData = request.formData();
+    const formData = await request.formData();
     const credentials = Object.fromEntries(formData);
 
     // validate user input
     try {
         validateCredentials(credentials);
-    } catch(err) {
+    } catch (err) {
         return err;
     }
 
-
-    if (authMode === "login") {
-        // login logic
-    } else {
-        // signup logic
+    try {
+        if (authMode === "login") {
+            return await login(credentials);
+        } else {
+            return await signup(credentials);
+        }
+    } catch (err) {
+        if (err.status === 422) {
+            return { credentials: err.message };
+        }
     }
+    console.log("fell through")
 }
 
 export function links() {
-    return [
-        { rel: "stylesheet", href: styles }
-    ]
+    return [{ rel: "stylesheet", href: styles }];
 }

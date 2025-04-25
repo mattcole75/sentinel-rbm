@@ -6,6 +6,7 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
+    useMatches,
     useRouteError,
 } from "@remix-run/react";
 
@@ -14,7 +15,10 @@ import Error from "./components/util/Error";
 import styles from "./styles/shared.css?url";
 
 
-export function Layout({ children }) {
+function Layout({ children }) {
+    const matches = useMatches();
+    const disableJS = matches.some(match => match.handle?.disableJS);
+
   return (
     <html lang="en">
         <head>
@@ -26,19 +30,18 @@ export function Layout({ children }) {
         <body>
             { children }
             <ScrollRestoration />
-            <Scripts />
+            { !disableJS && <Scripts /> }
         </body>
     </html>
   );
 }
-
 
 export default function App() {
   return (
     <Layout>
         <Outlet />;
     </Layout>
-  )
+  );
 }
 
 export function links() {

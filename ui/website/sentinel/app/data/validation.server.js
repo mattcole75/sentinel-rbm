@@ -30,25 +30,28 @@ function isValidEmail(value) {
         );
 }
 
-function isValidPassword(password) {
-    /* giving credit... http://www.thegeekstuff.com/2008/06/the-ultimate-guide-for-creating-strong-passwords */
-    var ucAlphaCount = 0, lcAlphaCount = 0, numberCount = 0, specialCount = 0,
-        parsedPwd = password.split(''), specialChars = ['!', '@', '#', '$', '%', '&', '_'];
-
-    //0. 8 characters in length
-    if (password.toString().trim().length < 8) { return false; }
-    //1. at least one lower case alphabet
-    //2. at least one upper case alphabet
-    //3. at least one number
-    //4. at least one special character
-    parsedPwd.forEach(function (character) {
-        if (character === character.toUpperCase()) { ucAlphaCount++; }
-        if (character === character.toLowerCase()) { lcAlphaCount++; }
-        if (!isNaN(character)) { numberCount++; }
-        if (specialChars.indexOf(character) > -1) { specialCount++; }
-    });
-    return (ucAlphaCount > 0 && lcAlphaCount > 0 && numberCount > 0 && specialCount > 0);
+function isValidPassword(value) {
+    return value && value.trim().length >= 8;
 }
+// function isValidPassword(password) {
+//     /* giving credit... http://www.thegeekstuff.com/2008/06/the-ultimate-guide-for-creating-strong-passwords */
+//     var ucAlphaCount = 0, lcAlphaCount = 0, numberCount = 0, specialCount = 0,
+//         parsedPwd = password.split(''), specialChars = ['!', '@', '#', '$', '%', '&', '_'];
+
+//     //0. 8 characters in length
+//     if (password.toString().trim().length < 8) { return false; }
+//     //1. at least one lower case alphabet
+//     //2. at least one upper case alphabet
+//     //3. at least one number
+//     //4. at least one special character
+//     parsedPwd.forEach(function (character) {
+//         if (character === character.toUpperCase()) { ucAlphaCount++; }
+//         if (character === character.toLowerCase()) { lcAlphaCount++; }
+//         if (!isNaN(character)) { numberCount++; }
+//         if (specialChars.indexOf(character) > -1) { specialCount++; }
+//     });
+//     return (ucAlphaCount > 0 && lcAlphaCount > 0 && numberCount > 0 && specialCount > 0);
+// }
   
 // function isValidAmount(value) {
 //     const amount = parseFloat(value);
@@ -72,6 +75,7 @@ export function validateCredentials(input) {
 
 
     if(Object.keys(validationErrors).length > 0) {
+        console.log("mca", validationErrors);
         throw validationErrors;
     }
 }

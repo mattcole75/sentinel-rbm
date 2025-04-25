@@ -1,4 +1,11 @@
-import { Form, Link, useActionData, useMatches, useNavigation, useParams } from "@remix-run/react";
+import {
+    Form,
+    Link,
+    useActionData,
+    useMatches,
+    useNavigation,
+    useParams,
+} from "@remix-run/react";
 
 function SystemForm() {
     // const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
@@ -7,34 +14,57 @@ function SystemForm() {
     // instead of using a loader to query the database we can pull the object from the list in the systems list as follows
     const params = useParams(); // pull the route parameter, in the case it will be id
     const matches = useMatches(); // matches contains all current active routes
-    const systems = matches.find(match => match.id === "routes/_systems.systems._list").data; // accesses the array in this route, instead of querying the database for the record
-    const systemData = systems && systems.find(system => system.id === parseInt(params.id)) // find the object in the list based on its id
-    
+    const systems = matches.find(
+        (match) => match.id === "routes/_systems.systems._list"
+    ).data; // accesses the array in this route, instead of querying the database for the record
+    const systemData =
+        systems && systems.find((system) => system.id === params.id); // find the object in the list based on its id
+
     const navigation = useNavigation();
 
-    const defaultValues = systemData 
+    const defaultValues = systemData
         ? {
-            name: systemData.name,
-            description: systemData.description
-        }
+              name: systemData.name,
+              description: systemData.description,
+          }
         : {
-            name: "",
-            description: ""
-        }
-
+              name: "",
+              description: "",
+          };
 
     const isSubmitting = navigation.state !== "idle";
 
     return (
-        <Form method={systemData ? "patch" : "delete"} className="form" id="system-form">
+        <Form
+            method={systemData ? "patch" : "delete"}
+            className="form"
+            id="system-form"
+        >
             <p>
                 <label htmlFor="name">System Name</label>
-                <input type="text" id="name" name="name" required minLength={1} maxLength={64} defaultValue={defaultValues.name} />
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    minLength={1}
+                    maxLength={64}
+                    defaultValue={defaultValues.name}
+                />
             </p>
 
             <p>
                 <label htmlFor="description">System Description</label>
-                <textarea type="" id="description" name="description" rows="8" required minLength={1} maxLength={512} defaultValue={defaultValues.description} />
+                <textarea
+                    type=""
+                    id="description"
+                    name="description"
+                    rows="8"
+                    required
+                    minLength={1}
+                    maxLength={512}
+                    defaultValue={defaultValues.description}
+                />
             </p>
 
             {/* <p>
@@ -64,15 +94,18 @@ function SystemForm() {
                     <input type="date" id="date" name="date" max={today} required />
                 </p>
             </div> */}
-            {validationErrors && 
+            {validationErrors && (
                 <ul>
                     {Object.values(validationErrors).map((err) => (
                         <li key={err}>{err}</li>
                     ))}
-                </ul>}
+                </ul>
+            )}
 
             <div className="form-actions">
-                <button disabled={isSubmitting}>{isSubmitting ? "Saving..." : "Save Requirement"}</button>
+                <button disabled={isSubmitting}>
+                    {isSubmitting ? "Saving..." : "Save System"}
+                </button>
                 <Link to="..">Cancel</Link>
             </div>
         </Form>

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "config": "^3.3.12",
+    "gitignore": "^0.7.0",
+    "microservices": "^0.1.0",
+    "package-lock.json": "^1.0.0",
+    "ui": "^0.2.4"
+  }
+}

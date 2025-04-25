@@ -1,6 +1,7 @@
 // import ExpensesHeader from "../components/navigation/ExpensesHeader";
 import Statistics from "../components/system/Statistics";
 import Chart from "../components/system/Chart";
+import { requireUserSession } from "../data/auth.server";
 
 
 const DUMMY_EXPENSES = [
@@ -35,4 +36,8 @@ export default function AnalysisPage() {
         </>
         
     )
+}
+
+export async function loader({request}) {
+    await requireUserSession(request);
 }
